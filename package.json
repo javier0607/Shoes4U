@@ -1,0 +1,26 @@
+{
+  "name": "shoes4u",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javier0607/Shoes4U.git"
+  },
+  "keywords": [
+    "node",
+    "api",
+    "Shoes4U",
+    "Sneakerhead"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javier0607/Shoes4U/issues"
+  },
+  "homepage": "https://github.com/javier0607/Shoes4U#readme"
+}
