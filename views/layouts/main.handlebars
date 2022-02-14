@@ -1,44 +1,104 @@
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fund My Project!</title>
-  <link rel="stylesheet" href="/css/jass.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Pedi-curate!</title>
+    <link rel="stylesheet" href="/css/jass.css" />
+    <link
+      rel="stylesheet"
+      href="/in_class/week8/Projects/Shoes4U/public/assets/css/style.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">Fund My Project!</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">login</a>
-        {{/if}}
-      </nav>
-    </header>
-    <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
+  <body>
+    <div class="flex-column justify-space-around">
+      <header class="display-flex justify-space-between align-center p-2">
+        <h1>
+          <span role="img" aria-label="shoe">👟</span>
+          <a href="/">Welcome to Pedi-curate!</a>
+        </h1>
+        <nav>
+          <!-- login links -->
+          <div class="container overflow-hidden">
+            <div class="row gx-5">
+              <div class="col">
+                <div class="p-3 border bg-light">
+                  {{#if logged_in}}
+                    <a href="/profile">profile</a>
+                    |
+                    <button class="no-button" id="logout">logout</button>
+                  {{else}}
+                    <a href="/login">login</a>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Signup links -->
+          <div class="container overflow-hidden">
+            <div class="row gx-5">
+              <div class="col">
+                <div class="p-3 border bg-light">
+                  {{#if signed_up}}
+                    <a href="/profile">profile</a>
+                    |
+                    <button class="no-button" id="sign">sign up</button>
+                  {{else}}
+                    <a href="/sign">sign up</a>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Search button -->
+          <div class="input-group">
+            <input
+              type="search"
+              class="form-control rounded"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="search-addon"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+            >search</button>
+          </div>
+        </nav>
 
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="/assets/js/index.js"></script>
-  {{/if}}
-</body>
+      </header>
+      <main class="container container-fluid mt-5">
+        <!-- Render the sub layout -->
+        {{{body}}}
+        <img src="/in_class/week8/Projects/Shoes4U/public/assets/images/shoe4us.jpeg" class="img-fluid" alt="sneakers">
+      </main>
+      <footer>
+
+      </footer>
+    </div>
+
+    <!-- Render script for logged in users only -->
+    {{#if logged_in}}
+      <script src="/assets/js/index.js"></script>
+    {{/if}}
+    {{#if signed_up}}
+      <script src="/assets/js/index.js"></script>
+    {{/if}}
+
+    <br>
+
+    <h3>
+  Display Text
+  <small class="text-muted">With faded secondary text</small>
+</h3>
+
+  </body>
 
 </html>
