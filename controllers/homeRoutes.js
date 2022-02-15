@@ -88,4 +88,10 @@ router.get('/sign', (req, res) => {
 
   res.render('sign');
 });
+
+router.get('/closet', (req, res) => {
+  //go get the user from database with user model
+  //bring back all shoes for this user
+  res.render('closet');
+})
 module.exports = router;

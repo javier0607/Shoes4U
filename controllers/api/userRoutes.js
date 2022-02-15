@@ -91,3 +91,5 @@ router.post('/logout', (req, res) => {
 });
 
 module.exports = router;
+//need get route to find all shoes of user
+//need post route for the user to create/add new shoes
