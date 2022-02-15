@@ -1,0 +1,18 @@
+body {
+    color: skyblue;
+    background-image: url('../images/shoe4us.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.search {
+    width: 20%;
+    float: right;
+}
+.nav-links {
+    width: 20%;
+    float: left;
+}
+
+#col {
+    padding: 100px;
+}

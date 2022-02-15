@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS shoes_db;
+CREATE DATABASE shoes_db;
