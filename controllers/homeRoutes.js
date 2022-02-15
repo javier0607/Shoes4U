@@ -1,5 +1,6 @@
 const router = require('express').Router();
-// const { Project, User } = require('../models');
+
+ const { Project, User } = require('../models');
 // const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -20,7 +21,9 @@ router.get('/', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('homepage', { 
     //   projects, 
-    //   logged_in: req.session.logged_in 
+
+     logged_in: req.session.logged_in 
+
     });
   } catch (err) {
     res.status(500).json(err);
@@ -69,23 +72,89 @@ router.get('/', async (req, res) => {
 //   }
 // });
 
+// Login
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-//   if (req.session.logged_in) {
-//     res.redirect('/profile');
-//     return;
-//   }
+   if (req.session.logged_in) {
+     res.redirect('/');
+     return;
+   }
 
   res.render('login');
 }); 
+router.post('/login', async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { email: req.body.email } });
 
-router.get('/sign', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-//   if (req.session.logged_in) {
-//     res.redirect('/profile');
-//     return;
-//   }
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
 
-  res.render('sign');
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
+
+router.get('/signup', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('signup');
+}); 
+// Signup
+router.post('/signup', async (req, res) =>{
+  console.log("Sign up: ", req.body);
+  try{
+      const {email, password} = req.body
+      const creat_user = await User.create({ 
+          email,
+          password
+      });
+
+      req.session.save(() =>{
+          req.session.user_id = creat_user.id;
+          req.session.logged_in = true;
+          res.status(200).json(creat_user)
+      });
+  } catch(err){
+      res.status(500).send(err);
+  }
+});
+
+// Logout
+router.post('/logout', (req, res) => {
+  
+  // When the user logs out, destroy the session
+  if (req.session.logged_in) {
+    console.log("Logging out")
+    req.session.destroy(() => {
+      res.status(200).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
 module.exports = router;
