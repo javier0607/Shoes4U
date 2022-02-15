@@ -1,3 +1,4 @@
+
 body {
     color: skyblue;
     background-image: url('../images/shoe4us.jpeg');
@@ -11,6 +12,7 @@ body {
 .nav-links {
     width: 20%;
     float: left;
+
 }
 
 #col {
